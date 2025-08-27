@@ -1,0 +1,23 @@
+﻿using System.Security.Claims;
+using TF_IOT2025_DemoJwt_API.Enums;
+
+namespace TF_IOT2025_DemoJwt_API.Utils.Extensions
+{
+    public static class ExtendedUser
+    {
+        public static int GetId(this ClaimsPrincipal principal)
+        {
+            return int.Parse(principal.FindFirst(ClaimTypes.Sid)!.Value);
+        }
+
+        public static string GetUserName(this ClaimsPrincipal principal)
+        {
+            return principal.FindFirst(ClaimTypes.Name)!.Value;
+        }
+
+        public static UserRole GetRole(this ClaimsPrincipal principal)
+        {
+            return Enum.Parse<UserRole>(principal.FindFirst(ClaimTypes.Role)!.Value);
+        }
+    }
+}

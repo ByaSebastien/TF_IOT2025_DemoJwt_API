@@ -1,0 +1,6 @@
+@TF_IOT2025_DemoJwt_API_HostAddress = http://localhost:5172
+
+GET {{TF_IOT2025_DemoJwt_API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
