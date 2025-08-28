@@ -10,7 +10,7 @@ namespace TF_IOT2025_DemoJwt_API.Mappers
             return new UserDTO()
             {
                 Id = u.Id,
-                role = u.Role,
+                role = u.Role.ToString(),
                 Username = u.Username,
             };
         }

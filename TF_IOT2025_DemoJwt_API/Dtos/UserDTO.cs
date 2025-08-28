@@ -7,7 +7,7 @@ namespace TF_IOT2025_DemoJwt_API.Dtos
     {
         public int Id { get; set; }
         public string Username { get; set; } = null!;
-        public UserRole role { get; set; }
+        public string role { get; set; } = null!;
     }
 
     public class UserTokenDTO
