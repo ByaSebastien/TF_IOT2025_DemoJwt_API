@@ -16,6 +16,9 @@ namespace TF_IOT2025_DemoJwt_API.Entities.Configs
             builder.Property(u => u.Password).IsRequired();
 
             builder.Property(u => u.Role).IsRequired().HasConversion<string>();
+
+            builder.HasMany(u => u.Houses)
+                   .WithMany(h => h.Users);
         }
     }
 }

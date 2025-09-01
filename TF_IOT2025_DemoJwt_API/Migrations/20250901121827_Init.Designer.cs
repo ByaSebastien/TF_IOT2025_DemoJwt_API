@@ -11,8 +11,8 @@ using TF_IOT2025_DemoJwt_API.Entities.Contexts;
 namespace TF_IOT2025_DemoJwt_API.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20250827074942_init")]
-    partial class init
+    [Migration("20250901121827_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,38 @@ namespace TF_IOT2025_DemoJwt_API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("HouseUser", b =>
+                {
+                    b.Property<int>("HousesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("HousesId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("HouseUser");
+                });
+
+            modelBuilder.Entity("TF_IOT2025_DemoJwt_API.Entities.House", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Houses");
+                });
 
             modelBuilder.Entity("TF_IOT2025_DemoJwt_API.Entities.User", b =>
                 {
@@ -50,6 +82,21 @@ namespace TF_IOT2025_DemoJwt_API.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("HouseUser", b =>
+                {
+                    b.HasOne("TF_IOT2025_DemoJwt_API.Entities.House", null)
+                        .WithMany()
+                        .HasForeignKey("HousesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TF_IOT2025_DemoJwt_API.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
