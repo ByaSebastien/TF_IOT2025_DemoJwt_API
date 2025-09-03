@@ -14,6 +14,8 @@ namespace TF_IOT2025_DemoJwt_API.Entities.Configs
 
             builder.HasMany(h => h.Users)
                    .WithMany(u => u.Houses);
+
+            builder.HasIndex(h => h.Name).IsUnique();
         }
     }
 }

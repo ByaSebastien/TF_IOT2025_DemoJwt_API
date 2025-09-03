@@ -43,7 +43,8 @@ builder.Services.AddSwaggerGen(c =>
 
 });
 
-builder.Services.AddDbContext<MyDbContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Main")));
+builder.Services.AddDbContext<MyDbContext>(o => o
+    .UseSqlServer(builder.Configuration.GetConnectionString("Main")));
 
 builder.Services.AddSingleton<JwtUtils>();
 
@@ -72,7 +73,10 @@ builder.Services.AddCors(o =>
 {
     o.AddDefaultPolicy(p =>
     {
-        p.WithOrigins("http://localhost:4200", builder.Configuration.GetSection("TokenInfo").GetSection("audience").Value!);
+        p.WithOrigins(
+            "http://localhost:4200", 
+            builder.Configuration.GetSection("TokenInfo")
+                .GetSection("audience").Value!);
         p.AllowAnyHeader();
         p.AllowAnyMethod();
     });
@@ -86,8 +90,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthentication();
 

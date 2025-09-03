@@ -1,4 +1,6 @@
-﻿namespace TF_IOT2025_DemoJwt_API.Entities
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace TF_IOT2025_DemoJwt_API.Entities
 {
     public class House
     {
