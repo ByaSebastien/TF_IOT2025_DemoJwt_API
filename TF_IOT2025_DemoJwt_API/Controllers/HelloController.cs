@@ -10,14 +10,14 @@ namespace TF_IOT2025_DemoJwt_API.Controllers
     public class HelloController : ControllerBase
     {
 
-        [Authorize("Auth")]
+        //[Authorize("Auth")]
         [HttpGet]
         public IActionResult SayHello()
         {
-            int id = User.GetId();
-            string username = User.GetUserName();
-            UserRole role = User.GetRole(); 
-            return Ok(new { Content = $"Hello {username}" });
+            //int id = User.GetId();
+            //string username = User.GetUserName();
+            //UserRole role = User.GetRole(); 
+            return Ok(new { Content = $"Hello world!!!" });
         }
     }
 }
