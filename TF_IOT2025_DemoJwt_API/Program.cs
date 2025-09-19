@@ -73,7 +73,7 @@ builder.Services.AddCors(o =>
 {
     o.AddPolicy("truc", p =>
     {
-        p.WithOrigins("https://nice-rock-0c0e87c03.1.azurestaticapps.net");
+        p.WithOrigins("https://lemon-plant-076139e03.2.azurestaticapps.net");
         p.AllowAnyHeader();
         p.AllowAnyMethod();
         p.AllowCredentials();
