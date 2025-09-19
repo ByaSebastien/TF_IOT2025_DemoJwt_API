@@ -74,7 +74,7 @@ builder.Services.AddCors(o =>
     o.AddDefaultPolicy(p =>
     {
         p.WithOrigins(
-            "https://nice-sea-073378603.2.azurestaticapps.net", 
+            "https://lively-bush-0a6b65503.2.azurestaticapps.net", 
             builder.Configuration.GetSection("TokenInfo")
                 .GetSection("audience").Value!);
         p.AllowAnyHeader();
