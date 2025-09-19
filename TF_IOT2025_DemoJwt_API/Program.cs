@@ -72,7 +72,8 @@ builder.Services.AddCors(o =>
 {
     o.AddDefaultPolicy(p =>
     {
-        p.WithOrigins("http://localhost:4200", builder.Configuration.GetSection("TokenInfo").GetSection("audience").Value!);
+        //("http://localhost:4200", builder.Configuration.GetSection("TokenInfo").GetSection("audience").Value!);
+        p.AllowAnyOrigin();
         p.AllowAnyHeader();
         p.AllowAnyMethod();
     });
