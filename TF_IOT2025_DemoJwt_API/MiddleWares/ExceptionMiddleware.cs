@@ -32,7 +32,7 @@ namespace TF_IOT2025_DemoJwt_API.MiddleWares
             switch (ex)
             {
                 case Exception:
-                    statusCode = 418;
+                    statusCode = 400;
                     break;
                 default:
                     throw new Exception("WTF");
