@@ -71,11 +71,12 @@ builder.Services.AddAuthorization(o =>
 
 builder.Services.AddCors(o =>
 {
-    o.AddDefaultPolicy(p =>
+    o.AddPolicy("truc", p =>
     {
         p.WithOrigins("https://lively-bush-0a6b65503.2.azurestaticapps.net");
         p.AllowAnyHeader();
         p.AllowAnyMethod();
+        p.AllowCredentials();
     });
 });
 
@@ -94,7 +95,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseCors();
+app.UseCors("truc");
 
 app.MapControllers();
 
