@@ -43,7 +43,8 @@ builder.Services.AddSwaggerGen(c =>
 
 });
 
-builder.Services.AddDbContext<MyDbContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Main")));
+builder.Services.AddDbContext<MyDbContext>(o => o
+    .UseSqlServer(builder.Configuration.GetConnectionString("Main")));
 
 builder.Services.AddSingleton<JwtUtils>();
 
@@ -72,8 +73,10 @@ builder.Services.AddCors(o =>
 {
     o.AddDefaultPolicy(p =>
     {
-        //("http://localhost:4200", builder.Configuration.GetSection("TokenInfo").GetSection("audience").Value!);
-        p.AllowAnyOrigin();
+        p.WithOrigins(
+            "https://nice-sea-073378603.2.azurestaticapps.net", 
+            builder.Configuration.GetSection("TokenInfo")
+                .GetSection("audience").Value!);
         p.AllowAnyHeader();
         p.AllowAnyMethod();
     });
