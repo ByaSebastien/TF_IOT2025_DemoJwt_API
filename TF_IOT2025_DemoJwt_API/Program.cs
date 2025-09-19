@@ -73,7 +73,7 @@ builder.Services.AddCors(o =>
 {
     o.AddDefaultPolicy(p =>
     {
-        p.AllowAnyOrigin();
+        p.WithOrigins("https://lively-bush-0a6b65503.2.azurestaticapps.net");
         p.AllowAnyHeader();
         p.AllowAnyMethod();
     });
