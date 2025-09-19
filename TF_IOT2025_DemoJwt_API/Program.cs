@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using TF_IOT2025_DemoJwt_API.Entities.Contexts;
+using TF_IOT2025_DemoJwt_API.MiddleWares;
 using TF_IOT2025_DemoJwt_API.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -90,6 +91,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthentication();
 
