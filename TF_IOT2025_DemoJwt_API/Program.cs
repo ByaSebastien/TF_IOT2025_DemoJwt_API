@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using TF_IOT2025_DemoJwt_API.Entities.Contexts;
+using TF_IOT2025_DemoJwt_API.MiddleWares;
 using TF_IOT2025_DemoJwt_API.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,7 +44,8 @@ builder.Services.AddSwaggerGen(c =>
 
 });
 
-builder.Services.AddDbContext<MyDbContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Main")));
+builder.Services.AddDbContext<MyDbContext>(o => o
+    .UseSqlServer(builder.Configuration.GetConnectionString("Main")));
 
 builder.Services.AddSingleton<JwtUtils>();
 
@@ -70,11 +72,12 @@ builder.Services.AddAuthorization(o =>
 
 builder.Services.AddCors(o =>
 {
-    o.AddDefaultPolicy(p =>
+    o.AddPolicy("truc", p =>
     {
-        p.WithOrigins("http://localhost:4200", builder.Configuration.GetSection("TokenInfo").GetSection("audience").Value!);
+        p.WithOrigins("https://lemon-plant-076139e03.2.azurestaticapps.net");
         p.AllowAnyHeader();
         p.AllowAnyMethod();
+        p.AllowCredentials();
     });
 });
 
@@ -89,11 +92,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseMiddleware<ExceptionMiddleware>();
+
 app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseCors();
+app.UseCors("truc");
 
 app.MapControllers();
 
